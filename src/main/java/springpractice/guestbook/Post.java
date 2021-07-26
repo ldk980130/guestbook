@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Getter
@@ -25,6 +26,8 @@ public class Post {
         post.hates = 0;
 
         post.createTime = System.currentTimeMillis();
+        post.timeFormat = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초")
+                .format(post.createTime);
 
         return post;
     }
@@ -40,6 +43,7 @@ public class Post {
     private int hates;
 
     private Long createTime;
+    private String timeFormat;
 
     //매서드
 
