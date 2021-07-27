@@ -31,7 +31,7 @@ public class PostService {
         postRepository.delete(post);
     }
 
-    public Optional<Post> searchById(Long id) {
+    public Post searchById(Long id) {
         return postRepository.findById(id);
     }
 
@@ -45,6 +45,18 @@ public class PostService {
 
     public List<Post> searchAll() {
         return postRepository.findAll();
+    }
+
+    @Transactional
+    public void pushLike(Long postId) {
+        Post post = postRepository.findById(postId);
+        post.addLike();
+    }
+
+    @Transactional
+    public void pushHate(Long postId) {
+        Post post = postRepository.findById(postId);
+        post.addHate();
     }
 
 }

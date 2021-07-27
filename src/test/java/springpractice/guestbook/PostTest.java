@@ -40,4 +40,18 @@ public class PostTest {
         //then
         assertThat(result).isEqualTo(false);
     }
+
+    @Test
+    public void 좋아요() throws Exception {
+        //given
+        Post post = Post.createPost("user", "abcd");
+
+        //when
+        post.addLike();
+        post.addHate();
+
+        //then
+        assertThat(post.getLikes()).isEqualTo(1);
+        assertThat(post.getHates()).isEqualTo(1);
+    }
 }

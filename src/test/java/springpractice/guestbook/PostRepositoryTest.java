@@ -30,7 +30,7 @@ public class PostRepositoryTest {
         postRepository.save(post);
 
         //then
-        assertThat(postRepository.findById(post.getId()).get()).isEqualTo(post);
+        assertThat(postRepository.findById(post.getId())).isEqualTo(post);
     }
 
     @Test

@@ -2,6 +2,7 @@ package springpractice.guestbook;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,7 +49,6 @@ public class Post {
     //매서드
 
     public void addLike() { this.likes++; }
-
     public void addHate() { this.hates++; }
 
     public boolean canPost(Post other) {

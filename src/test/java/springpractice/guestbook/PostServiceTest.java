@@ -35,7 +35,7 @@ public class PostServiceTest {
 
         //then
         assertThat(postService.searchAll().size()).isEqualTo(4);
-        assertThat(postService.searchById(post1.getId()).get()).isEqualTo(post1);
+        assertThat(postService.searchById(post1.getId())).isEqualTo(post1);
     }
 
     @Test
@@ -101,5 +101,18 @@ public class PostServiceTest {
 
         //then
         assertThat(postService.searchAll().size()).isEqualTo(2);
+    }
+
+    @Test
+    public void 좋아요_변경감지() throws Exception {
+        //given
+        Post post = Post.createPost("user", "hello");
+        postService.post(post);
+
+        //when
+        postService.pushLike(post.getId());
+
+        //then
+        assertThat(post.getLikes()).isEqualTo(1);
     }
 }

@@ -6,15 +6,20 @@
     <style type="text/css">
         input {width: 300px;margin-bottom: 10px;}
         textarea {width: 300px; height: 100px}
+        a{text-decoration: none}
     </style>
 </head>
 <body>
 <div th:each="post : ${posts}">
-    ID : <span th:text="${post.getId()}"></span><br>
-    이름 : <span th:text="${post.getName()}"></span><br>
-    내용 : <spanp th:text="${post.getContent()}"></spanp><br>
-    좋아요 <span th:text="${post.getLikes()}"></span>
-    싫어요 <span th:text="${post.getHates()}"></span>
+    ID : <span th:text="${post.getId()}"></span><br><br>
+    이름 : <span th:text="${post.getName()}"></span><br><br>
+    내용 : <span th:text="${post.getContent()}"></span><br><br>
+
+    <a href="#" th:href="@{like/{id} (id=${post.getId()})}">좋아요</a>
+    <span th:text="${post.getLikes()}"></span>
+    <a href="#" th:href="@{hate/{id} (id=${post.getId()})}">싫어요</a>
+    <span th:text="${post.getHates()}"></span><br>
+
     <p th:text="${post.getTimeFormat()}"></p>
     <hr>
 </div>

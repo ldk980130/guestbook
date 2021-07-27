@@ -21,9 +21,9 @@ public class PostRepository {
         em.remove(post);
     }
 
-    public Optional<Post> findById(Long id) {
+    public Post findById(Long id) {
         Post post = em.find(Post.class, id);
-        return Optional.ofNullable(post);
+        return post;
     }
 
     public List<Post> findByName(String name) {
