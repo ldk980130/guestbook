@@ -6,7 +6,9 @@
     <style type="text/css">
         input {width: 300px;margin-bottom: 10px;}
         textarea {width: 300px; height: 100px}
-        a{text-decoration: none}
+        a{text-decoration: none;}
+        #like{color: blue}
+        #hate{color: red}
     </style>
 </head>
 <body>
@@ -15,9 +17,9 @@
     이름 : <span th:text="${post.getName()}"></span><br><br>
     내용 : <span th:text="${post.getContent()}"></span><br><br>
 
-    <a href="#" th:href="@{like/{id} (id=${post.getId()})}">좋아요</a>
+    <a id="like" href="#" th:href="@{like/{id} (id=${post.getId()})}">좋아요</a>
     <span th:text="${post.getLikes()}"></span>
-    <a href="#" th:href="@{hate/{id} (id=${post.getId()})}">싫어요</a>
+    <a id="hate" href="#" th:href="@{hate/{id} (id=${post.getId()})}">싫어요</a>
     <span th:text="${post.getHates()}"></span><br>
 
     <p th:text="${post.getTimeFormat()}"></p>
