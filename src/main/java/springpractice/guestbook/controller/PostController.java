@@ -50,7 +50,12 @@ public class PostController {
 
     @GetMapping("hate/{postId}")
     public String pushHate(@PathVariable Long postId) {
-        postService.pushHate(postId);
+        Post post = postService.pushHate(postId);
+
+        if (post.getHates() >= 10) {
+            postService.delete(post);
+        }
+
         return "redirect:/";
     }
 

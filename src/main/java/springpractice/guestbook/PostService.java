@@ -48,15 +48,17 @@ public class PostService {
     }
 
     @Transactional
-    public void pushLike(Long postId) {
+    public Post pushLike(Long postId) {
         Post post = postRepository.findById(postId);
         post.addLike();
+        return post;
     }
 
     @Transactional
-    public void pushHate(Long postId) {
+    public Post pushHate(Long postId) {
         Post post = postRepository.findById(postId);
         post.addHate();
+        return post;
     }
 
 }
