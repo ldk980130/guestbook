@@ -21,7 +21,6 @@
 
 <div class="post_box">
     <form th:object="${form}" method="post">
-
         이름: <input type="text" th:field="*{name}"> <br>
         내용: <textarea th:field="*{content}"></textarea> <br>
         <button type="submit">확인</button>
