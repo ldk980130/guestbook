@@ -1,6 +1,7 @@
 package springpractice.guestbook.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,14 +32,23 @@ public class PostController {
     }
 
     @PostMapping("/")
-    public String posting(@Valid PostForm form, BindingResult result) {
+    public String posting(@Valid PostForm form, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("errorMessage",
+                    "이름과 내용 모두 입력해야 합니다.");
             return "errorpage";
         }
 
         Post post = Post.createPost(form.getName(), form.getContent());
-        postService.post(post);
+        try{
+            postService.post(post);
+        }catch(IllegalStateException e){
+            model.addAttribute("errorMessage",
+                    "같은 이용자가1분 내에 두 번 게시글을 올릴 수 없습니다.");
+            return "errorpage";
+        }
+
         return "redirect:/";
     }
 
