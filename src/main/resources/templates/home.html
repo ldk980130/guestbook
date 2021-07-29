@@ -4,34 +4,27 @@
     <meta charset="UTF-8">
     <title>메인</title>
     <style type="text/css">
-        input {width: 300px;margin-bottom: 10px;}
-        textarea {width: 300px; height: 100px}
         a{text-decoration: none;}
         #like{color: blue}
         #hate{color: red}
     </style>
 </head>
 <body>
+<a href="createPost">게시글 작성하기</a>
+
 <div th:each="post : ${posts}">
     ID : <span th:text="${post.getId()}"></span><br><br>
     이름 : <span th:text="${post.getName()}"></span><br><br>
     내용 : <span th:text="${post.getContent()}"></span><br><br>
 
-    <a id="like" href="#" th:href="@{like/{id} (id=${post.getId()})}">좋아요</a>
+    <a href="#" id="like" th:href="@{like/{id} (id=${post.getId()})}">좋아요</a>
     <span th:text="${post.getLikes()}"></span>
-    <a id="hate" href="#" th:href="@{hate/{id} (id=${post.getId()})}">싫어요</a>
+    <a href="#" id="hate" th:href="@{hate/{id} (id=${post.getId()})}">싫어요</a>
     <span th:text="${post.getHates()}"></span><br>
 
     <p th:text="${post.getTimeFormat()}"></p>
     <hr>
-</div>
 
-<div class="post_box">
-    <form th:object="${form}" method="post">
-        이름: <input type="text" th:field="*{name}"> <br>
-        내용: <textarea th:field="*{content}"></textarea> <br>
-        <button type="submit">확인</button>
-    </form>
 </div>
 
 </body>

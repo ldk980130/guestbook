@@ -22,16 +22,21 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/")
-    public String createPostForm(Model model) {
+    public String listPosts(Model model) {
         List<Post> posts = postService.searchAll();
         Collections.reverse(posts);
 
         model.addAttribute("posts", posts);
-        model.addAttribute("form", new PostForm());
         return "home";
     }
 
-    @PostMapping("/")
+    @GetMapping("createPost")
+    public String createPostForm(Model model) {
+        model.addAttribute("form", new PostForm());
+        return "createPost";
+    }
+
+    @PostMapping("createPost")
     public String posting(@Valid PostForm form, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
@@ -41,11 +46,11 @@ public class PostController {
         }
 
         Post post = Post.createPost(form.getName(), form.getContent());
-        try{
+        try {
             postService.post(post);
-        }catch(IllegalStateException e){
+        } catch (IllegalStateException e) {
             model.addAttribute("errorMessage",
-                    "같은 이용자가1분 내에 두 번 게시글을 올릴 수 없습니다.");
+                    "같은 이용자가 1분 내에 두 번 게시글을 올릴 수 없습니다.");
             return "errorpage";
         }
 
