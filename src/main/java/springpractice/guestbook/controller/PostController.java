@@ -55,22 +55,4 @@ public class PostController {
 
         return "redirect:/";
     }
-
-    @GetMapping("like/{postId}")
-    public String pushLike(@PathVariable Long postId) {
-        postService.pushLike(postId);
-        return "redirect:/";
-    }
-
-    @GetMapping("hate/{postId}")
-    public String pushHate(@PathVariable Long postId) {
-        Post post = postService.pushHate(postId);
-
-        if (post.getHates() >= 10) {
-            postService.delete(post);
-        }
-
-        return "redirect:/";
-    }
-
 }
