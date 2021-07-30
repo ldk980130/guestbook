@@ -51,9 +51,9 @@ public class Post {
     public void addLike() { this.likes++; }
     public void addHate() { this.hates++; }
 
-    public boolean canPost(Post other) {
+    public boolean canPost(Post prev) {
 
-        return this.createTime - other.createTime > 60000;
+        return this.createTime - prev.createTime > 60000;
     }
 
 
