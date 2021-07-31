@@ -1,15 +1,10 @@
 package springpractice.guestbook;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.temporal.ChronoField;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.*;
-
 
 public class PostTest {
 
@@ -21,7 +16,7 @@ public class PostTest {
         Post postLast = Post.createPost("user", "abcd");
 
         //when
-        boolean result = postLast.canPost(postFirst);
+        boolean result = postLast.canPost(Optional.ofNullable(postFirst));
 
         //then
         assertThat(result).isEqualTo(true);
@@ -35,7 +30,7 @@ public class PostTest {
         Post postLast = Post.createPost("user", "abcd");
 
         //when
-        boolean result = postLast.canPost(postFirst);
+        boolean result = postLast.canPost(Optional.ofNullable(postFirst));
 
         //then
         assertThat(result).isEqualTo(false);

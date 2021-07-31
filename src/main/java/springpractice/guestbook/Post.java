@@ -1,14 +1,13 @@
 package springpractice.guestbook;
 
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -51,9 +50,11 @@ public class Post {
     public void addLike() { this.likes++; }
     public void addHate() { this.hates++; }
 
-    public boolean canPost(Post prev) {
+    public boolean canPost(Optional<Post> prev) {
 
-        return this.createTime - prev.createTime > 60000;
+        if(prev.isEmpty()) return true;
+
+        return this.createTime - prev.get().createTime > 60000;
     }
 
 
