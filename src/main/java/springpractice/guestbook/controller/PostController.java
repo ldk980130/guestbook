@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,15 +46,15 @@ public class PostController {
         }
 
         Post post = Post.createPost(form.getName(), form.getContent());
-        try {
-            postService.post(post);
-        } catch (IllegalStateException e) {
-            model.addAttribute("form", form);
-            model.addAttribute("msg", "도배 금지");
-            return "createPost";
-        }
+        postService.post(post);
 
         return "redirect:/";
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public String postTooMuchHandler(Exception e, Model model) {
+        model.addAttribute("form", new PostForm());
+        model.addAttribute("msg", "도배 금지");
+        return "createPost";
+    }
 }
